@@ -1,10 +1,12 @@
-import { worker, workers } from "cluster";
 import React, { useState, useEffect } from "react";
 import InputData from "../data/input.txt";
 import TestData from "../data/testInput.txt";
 import { parseISO } from "date-fns";
 import { InvalidatedProject } from "typescript";
 import { max, min } from "date-fns/esm";
+import Question1 from "./Question1";
+import Question2 from "./Question2";
+import Question3 from "./Question3";
 
 const EXTRACT_INTERVALS_REGEX = /[^[\]]+(?=])/; // Get the content between [ ]
 
@@ -43,36 +45,9 @@ function getWorkers(testingData: any): Worker[] {
   return workers;
 }
 
-function question1(workers: Worker[]): Date {
-  const StartTimes: Date[] = [];
-  console.log(workers);
-  workers.forEach((worker) => {
-    worker.intervals.forEach((interval) => {
-      StartTimes.push(interval.startTime);
-      console.log("Added " + interval.startTime);
-    });
-  });
-  console.log(
-    "The start date/time of the earlies interval is: " + min(StartTimes)
-  );
-  return min(StartTimes);
-}
-
-function question2(workers: Worker[]): Date {
-  const EndTimes: Date[] = [];
-  console.log(workers);
-  workers.forEach((worker) => {
-    worker.intervals.forEach((interval) => {
-      EndTimes.push(interval.endTime);
-      console.log("Added " + interval.endTime);
-    });
-  });
-  console.log("The end date/time of the latest interval is: " + max(EndTimes));
-  return max(EndTimes);
-}
-
 const Home = () => {
   const [workers, setWorkers] = useState<Worker[]>([]);
+  const [showModal, toggleModal] = useState(false);
   useEffect(() => {
     fetch(TestData)
       .then((response) => response.text())
@@ -80,6 +55,7 @@ const Home = () => {
         setWorkers(getWorkers(data.toString().split("\n")));
       });
   }, [setWorkers]);
+
   return (
     <div>
       <h1>Workers</h1>
@@ -90,8 +66,10 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      <button onClick={() => question1(workers)}>Question 1 </button>
-      <button onClick={() => question2(workers)}>Question 2 </button>
+
+      <Question1 workers={workers} />
+      <Question2 workers={workers} />
+      <Question3 workers={workers} />
     </div>
   );
 };
