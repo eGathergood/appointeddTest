@@ -19,14 +19,14 @@ function CalculateQ1(workers: Worker[]): Date {
 }
 
 const Question1 = (props: any): any => {
-  const [answer, setAnswer] = useState<Date | null>(new Date());
+  const [answer, setAnswer] = useState<Date | null>(null);
 
   return (
     <div>
       <button onClick={() => setAnswer(CalculateQ1(props.workers))}>
-        update
+        Answer 1
       </button>
-      <h1>Answer 1: {JSON.stringify(answer)}</h1>
+      {answer && <h1>Answer 1: {JSON.stringify(answer)}</h1>}
     </div>
   );
 };

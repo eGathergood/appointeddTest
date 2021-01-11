@@ -17,11 +17,13 @@ function CalculateQ2(workers: Worker[]): Date {
 }
 
 const Question2 = (props: any): any => {
-  const [answer, setAnswer] = useState<Date | null>(new Date());
+  const [answer, setAnswer] = useState<Date | null>(null);
   return (
     <div>
-      <h1>Answer 2: {JSON.stringify(answer)}</h1>
-      <button onClick={() => setAnswer(CalculateQ2(props.workers))}> </button>
+      <button onClick={() => setAnswer(CalculateQ2(props.workers))}>
+        Answer 2
+      </button>
+      {answer && <h1>Answer 2: {JSON.stringify(answer)}</h1>}
     </div>
   );
 };

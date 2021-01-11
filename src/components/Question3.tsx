@@ -63,24 +63,16 @@ function CalculateQ3(workers: Worker[]): any {
 }
 
 const Question3 = (props: any): any => {
-  const [answer, setAnswer] = useState<Date | null>(new Date());
+  const [answer, setAnswer] = useState<Date | null>(null);
 
   return (
     <div>
       <button onClick={() => setAnswer(CalculateQ3(props.workers))}>
-        update q3
+        Answer 3
       </button>
+      {answer && <h1>Answer 3: {JSON.stringify(answer)}</h1>}
     </div>
   );
 };
-
-// Q3
-// worker1 has intervals
-// Worker2 has intervals
-// For each worker*, loop through each interval to find if there is any overlap?
-// Datefns https://date-fns.org/v1.30.1/docs/isWithinRange
-
-// "Does Worker 1 interval starDate overlap with worker 2's interval.
-// If YES then the "free time" is worker1 startDate - worker2 endDate (for that specific interval)"
 
 export default Question3;
