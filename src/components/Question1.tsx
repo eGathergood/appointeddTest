@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { parseISO } from "date-fns";
-import { Worker, Interval } from "./Types";
+import React, { useState } from "react";
+import { Worker } from "./Types";
 import { min } from "date-fns/esm/fp";
+import Button from "@material-ui/core/Button";
 
 function CalculateQ1(workers: Worker[]): Date {
   const StartTimes: Date[] = [];
@@ -23,10 +23,14 @@ const Question1 = (props: any): any => {
 
   return (
     <div>
-      <button onClick={() => setAnswer(CalculateQ1(props.workers))}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={() => setAnswer(CalculateQ1(props.workers))}
+      >
         Answer 1
-      </button>
-      {answer && <h1>Answer 1: {JSON.stringify(answer)}</h1>}
+      </Button>
+      {answer && <h2>Answer 1: {JSON.stringify(answer)}</h2>}
     </div>
   );
 };

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { parseISO } from "date-fns";
+import React, { useState } from "react";
 import { Worker, Interval } from "./Types";
-import { max } from "date-fns/esm/fp";
-import { areIntervalsOverlapping } from "date-fns";
+import Button from "@material-ui/core/Button";
 
-function CalculateQ3(workers: Worker[]): any {
+function CalculateQ3(workers: Worker[]): [] {
   const allInterval: any = [];
   const overlapIntervals: any = [];
   workers.forEach((worker) => {
@@ -15,14 +13,14 @@ function CalculateQ3(workers: Worker[]): any {
 
   console.log(allInterval);
 
-  allInterval.forEach((interval: any, index: any) => {
+  allInterval.forEach((interval: Interval, index: number) => {
     const startTime = allInterval[index].startTime;
     const endTime = allInterval[index].endTime;
 
     console.log(index + "Start time:  " + startTime);
     console.log("End time:  " + endTime);
 
-    allInterval.forEach((interval: any, compIndex: any) => {
+    allInterval.forEach((interval: Interval, compIndex: number) => {
       const comparisonStartTime = allInterval[compIndex].startTime;
       const comparisonEndTime = allInterval[compIndex].endTime;
 
@@ -51,26 +49,45 @@ function CalculateQ3(workers: Worker[]): any {
   end time is later than comparison start time : Ends after comparison starts
   AND
   Isn't the same id(interval)
-
   */
 
-  // console.log(JSON.stringify(allInterval[1].startTime));
+  // filters and removes duplicates
   const unique = overlapIntervals.filter(
-    (v: any, i: any, a: any) => a.indexOf(v) === i
+    (value: any, index: number, a: any) => a.indexOf(value) === index
   );
+
   console.log("Here's a date" + unique);
-  return allInterval;
+
+  const intervalArray: any = [];
+  unique.forEach((interval: Date, index: number) => {
+    intervalArray.push(interval);
+  });
+
+  //console.log(intervalArray);
+
+  return intervalArray;
 }
 
 const Question3 = (props: any): any => {
-  const [answer, setAnswer] = useState<Date | null>(null);
+  const [answer, setAnswer] = useState<any | null>(null);
 
   return (
     <div>
-      <button onClick={() => setAnswer(CalculateQ3(props.workers))}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={() => setAnswer(CalculateQ3(props.workers))}
+      >
         Answer 3
-      </button>
-      {answer && <h1>Answer 3: {JSON.stringify(answer)}</h1>}
+      </Button>
+
+      {answer && (
+        <ul>
+          {answer.map((val: Date) => (
+            <li key={answer}>Worker {val}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

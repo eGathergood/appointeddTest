@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import InputData from "../data/input.txt";
 import TestData from "../data/testInput.txt";
 import { parseISO } from "date-fns";
-import { InvalidatedProject } from "typescript";
-import { max, min } from "date-fns/esm";
 import Question1 from "./Question1";
 import Question2 from "./Question2";
 import Question3 from "./Question3";
@@ -58,21 +56,23 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Workers</h1>
-      <ul>
-        {workers.map((worker) => (
-          <li key={worker.id}>
-            Worker {worker.id} has {worker.intervals.length} free intervals
-          </li>
-        ))}
-      </ul>
-
       <Question1 workers={workers} />
       <Question2 workers={workers} />
       <Question3 workers={workers} />
     </div>
   );
 };
+
+{
+  /* <h1>Workers</h1>
+<ul>
+  {workers.map((worker) => (
+    <li key={worker.id}>
+      Worker {worker.id} has {worker.intervals.length} free intervals
+    </li>
+  ))}
+</ul> */
+}
 
 /*
 loop through workers =>
@@ -82,7 +82,7 @@ add to array/we
 Q1: call min on array
 Q2: call max on array
 
-Q3
+Q3gst
 worker1 has intervals
 Worker2 has intervals
 For each worker*, loop through each interval to find if there is any overlap?
