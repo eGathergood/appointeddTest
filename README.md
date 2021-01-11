@@ -21,4 +21,4 @@ Question 1 returns the expected output seen in the specification.
 # Question 3
 
 Some complications were encountered during Question 3, the output contains three extra intervals when compared to the expected output.
-This is due to the solution only outputting intervals which have 2 employees free rather than "two or more", however for a realistic use case I feel that having full intervals where multiple workers are free could be more useful than only showing a 15 minute interval with 3 workers free. NOTE: THe expected outputs are contained in the solution
+This is due to the solution only outputting intervals which have 2 employees free rather than "two or more", however for a realistic use case I feel that having full intervals where multiple workers are free could be more useful than only showing a 15 minute interval with 3 workers free. NOTE: The expected outputs are contained in the solution
