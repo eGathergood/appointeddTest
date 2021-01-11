@@ -16,7 +16,7 @@ Question 1 returns the expected output seen in the specification.
 
 # Question 2
 
-Question 1 returns the expected output seen in the specification.
+Question 2 returns the expected output seen in the specification.
 
 # Question 3
 
